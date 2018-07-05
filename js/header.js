@@ -1,6 +1,7 @@
 
 var height = 80;
 var speed = 500;
+var space = 100;
 
 //$.each($('.hassubmenu'),function()
 //{
@@ -10,12 +11,15 @@ var speed = 500;
 $('.hassubmenu').hover(
 	function(event)
 	{
-		//$(this).find('.submenu-container').animate({height:$(this).find('.sub-menu').height()},speed);
-
-		var hassubmenu = $(this);
         var submenucontainer = $(this).find('.submenu-container');
-		$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
+        var submenu = $(this).find('.sub-menu');
 
+        var height = $(this).height() + $(submenucontainer).height() + $(submenu).height() + space;
+        $(submenucontainer).css('height',height);
+        $(submenucontainer).css('top','-' + $(this).height() + 'px');
+        $(submenucontainer).css('display','block');
+
+<<<<<<< HEAD
  		var submenu = $(this).find('.sub-menu');
         var submenuheight = $(submenu).find('li').length * height;
 
@@ -52,49 +56,30 @@ $('.hassubmenu').hover(
         		$(hassubmenu).css('height',height + submenuheight);
         	});
         }        
+=======
+        $(submenu).css('top',$(submenucontainer).height() - $(submenu).height() );
+
+        $(submenu).stop().animate({top:$(this).height() - 1},speed);
+        $(submenucontainer).stop().animate({height:$(this).height() + $(submenu).height()},speed);
+>>>>>>> 70810ea216edae26065f19ae95375e1fa9f68bce
 	},
 	function(event)
 	{
-		//$(this).find('.submenu-container').animate({height:0},speed);
-
-		var hassubmenu = $(this);
-        var submenucontainer = $(this).find('.submenu-container');
-        var submenu = $(this).find('.sub-menu');
-
-        if ($(this).getMouseSide(event) == 'left')
-        {
-        	$(submenucontainer).stop().animate({width:0,left:0},speed / 2,function()
-        	{
-        		$(hassubmenu).css('height','80px');
-				$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
-        	});
-        }
-       	else if ($(this).getMouseSide(event) == 'right')
-        {
-        	$(submenucontainer).stop().animate({width:0,left:$(this).width()},speed / 2,function()
-        	{
-        		$(hassubmenu).css('height','80px');
-				$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
-        	});
-        }
-        else if ($(this).getMouseSide(event) == 'top')
-        {
-			$(submenucontainer).stop().animate({height:0},speed,function()
-			{
-				$(hassubmenu).css('height','80px');
-				$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
-			});
-        }	
-       	else if ($(this).getMouseSide(event) == 'bottom')
-        {
-			$(submenu).animate({top:$(this).find('.sub-menu').height()},speed,function()
-			{
-				$(hassubmenu).css('height','80px');
-				$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
-				$(submenu).css('top','0px');
-			});
-        }
 	}
+);
+
+
+$('.submenu-container').hover(
+    function(event)
+    {
+    },
+    function(event)
+    {
+        var submenu = $(this).find('.sub-menu');
+        $(this).css('height',$(submenu).height()).css('top',0);
+        $(submenu).css('top',0);
+        $(this).stop().animate({height:0},speed);
+    }
 );
 
 
