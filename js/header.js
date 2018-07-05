@@ -1,5 +1,11 @@
 
+var height = 80;
 var speed = 500;
+
+//$.each($('.hassubmenu'),function()
+//{
+//    $(this).attr('data', $(this).find('.submenu-container').height() );
+//})
 
 $('.hassubmenu').hover(
 	function(event)
@@ -11,13 +17,14 @@ $('.hassubmenu').hover(
 		$(submenucontainer).css('width','0px').css('left','0px').css('top','0px').css('height','0px');
 
  		var submenu = $(this).find('.sub-menu');
+        var submenuheight = $(submenu).find('li').length * height;
 
         if ($(this).getMouseSide(event) == 'left')
         {
         	$(submenucontainer).css('height',$(this).find('.sub-menu').height());
         	$(submenucontainer).stop().animate({width:$(this).width()},speed,function()
         	{
-        		$(hassubmenu).css('height',$(hassubmenu).height() + $(submenu).height());
+        		$(hassubmenu).css('height',height + submenuheight);
         	});
         }
         else if ($(this).getMouseSide(event) == 'right')
@@ -25,7 +32,7 @@ $('.hassubmenu').hover(
         	$(submenucontainer).css('left',$(this).width()).css('height',$(this).find('.sub-menu').height());
         	$(submenucontainer).stop().animate({left:0, width:$(this).width()},speed,function()
         	{
-        		$(hassubmenu).css('height',$(hassubmenu).height() + $(submenu).height());
+        		$(hassubmenu).css('height',height + submenuheight);
         	});
         }
         else if ($(this).getMouseSide(event) == 'top')
@@ -33,7 +40,7 @@ $('.hassubmenu').hover(
         	$(submenucontainer).css('width',$(this).width()).css('height','0px');
         	$(submenucontainer).stop().animate({height:$(this).find('.sub-menu').height()},speed,function()
         	{
-        		$(hassubmenu).css('height',$(hassubmenu).height() + $(submenu).height());
+        		$(hassubmenu).css('height',height + submenuheight);
         	});
         }
         else if ($(this).getMouseSide(event) == 'bottom')
@@ -42,7 +49,7 @@ $('.hassubmenu').hover(
         	$(submenu).css('top',$(submenu).height());
         	$(submenu).stop().animate({top:0},speed / 2,function()
         	{
-        		$(hassubmenu).css('height',$(hassubmenu).height() + $(submenu).height());
+        		$(hassubmenu).css('height',height + submenuheight);
         	});
         }        
 	},
